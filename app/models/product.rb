@@ -1,4 +1,7 @@
 class Product < ActiveRecord::Base
+  has_many :placements
+  has_many :orders, through: :placements
+
   belongs_to :user
 
   validates :title, :user_id, presence: true
