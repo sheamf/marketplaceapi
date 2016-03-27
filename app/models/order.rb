@@ -10,8 +10,10 @@ class Order < ActiveRecord::Base
 
   before_validation :set_total!
 
-  def set_total!
-    self.total = products.map(&:price).sum
-  end
+  private
+
+    def set_total!
+      self.total = products.map(&:price).sum
+    end
 
 end
