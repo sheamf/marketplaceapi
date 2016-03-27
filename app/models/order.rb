@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
     product_ids_and_quantities.each do |product_id_and_quantity|
       id, quantity = product_id_and_quantity # [1,5]
       # I think it would be better to use a hash here w/id and qty keys, but author wanted to keep it simple
-      self.placements.build(product_id: id)
+      self.placements.build(product_id: id, quantity: quantity)
     end
   end
 
