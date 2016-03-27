@@ -10,10 +10,16 @@ class Order < ActiveRecord::Base
 
   before_validation :set_total!
 
-  private
+  def set_total!
+    self.total = products.map(&:price).sum
+  end
 
-    def set_total!
-      self.total = products.map(&:price).sum
+  def build_placements_with_product_ids_and_quantities(product_ids_and_quantities)
+    product_ids_and_quantities.each do |product_id_and_quantity|
+      id, quantity = product_id_and_quantity # [1,5]
+      # I think it would be better to use a hash here w/id and qty keys, but author wanted to keep it simple
+      self.placements.build(product_id: id)
     end
+  end
 
 end
